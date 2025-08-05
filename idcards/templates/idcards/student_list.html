@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student ID Cards</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .id-card {
+            border: 1px solid #ccc;
+            padding: 15px;
+            margin: 10px;
+            width: 250px;
+            text-align: center;
+            box-shadow: 2px 2px 8px #aaa;
+        }
+        .id-photo {
+            height: 120px;
+            object-fit: cover;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body class="container mt-5">
+    <h2>All Student ID Cards</h2>
+    <div class="row">
+        {% for student in students %}
+        <div class="col-md-3">
+            <div class="id-card">
+                <img src="{{ student.photo.url }}" class="img-fluid id-photo rounded">
+                <h5>{{ student.name }}</h5>
+                <p>Class: {{ student.student_class }}</p>
+                <p>Section: {{ student.section }}</p>
+                <p><strong>ID: {{ student.student_id }}</strong></p>
+            </div>
+        </div>
+        {% empty %}
+        <p>No student IDs created yet.</p>
+        {% endfor %}
+    </div>
+    <a href="{% url 'add_student' %}" class="btn btn-primary mt-4">Add Another Student</a>
+</body>
+</html>
